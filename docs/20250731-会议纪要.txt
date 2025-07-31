@@ -1,0 +1,10 @@
+1. 无线胶囊内窥镜结肠疾病多分类  https://www.kaggle.com/datasets/francismon/curated-colon-dataset-for-deep-learning
+2. 肾结实的二分类     CSDN
+3. 无人机航拍数据源方向
+4. 人脸识别、比较2个人脸的相似度，公安民警找逃犯， 数据库比较人脸
+5. 机动车识别、非机动车识别
+6. 城市检测，人行道装摄像头，目标检测，占道经营
+7. 老人看护，行为检测，姿势识别
+8. 抓土车，工地上摄像头， 抓图车没有，目标检测
+9. 智能驾驶 ： https://opendatalab.com/OpenDriveLab/OpenLane 
+10. 安全帽检测 ： https://tianchi.aliyun.com/dataset/139063
