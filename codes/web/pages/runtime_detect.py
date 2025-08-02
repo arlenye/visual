@@ -19,28 +19,12 @@ confidence = float(st.slider('阈值设置', 25, 100, 30)) / 100
 video_path = st.text_input('请输入在线视频地址')
 
 
-def click_button():
+def start_detect():
     if video_path:
         st.video(video_path, autoplay = True)
-
-        # TODO 视频展示较慢。循环展示结果？
-        try:
-            tfile = tempfile.NamedTemporaryFile()
-            tfile.write(video_path.read())
-            vid_cap = cv2.VideoCapture(tfile.name)
-            st_frame = st.empty()
-
-            while (vid_cap.isOpened()):
-                success, image = vid_cap.read()
-                if success:
-                    display_detected_frames(st_frame, image, confidence)
-                else:
-                    vid_cap.release()
-                    break
-        except Exception as e:
-            st.error(f"Error loading video: {e}")
+        # TODO 待解析
     else:
-        st.error('在线视频地址不能为空')
+        st.error('在线视频地址不能为空！')
 
 
-st.button('检测', on_click = click_button)
+st.button('检测', on_click = start_detect)

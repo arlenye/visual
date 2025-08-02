@@ -20,4 +20,19 @@ if video_file is not None:
     # 播放上传的视频
     st.video(video_file, format = "video/mp4", start_time = 0, autoplay = True)
 
-    # TODO 在线视频解析
+    # TODO 视频展示较慢。循环展示结果？
+    try:
+        tfile = tempfile.NamedTemporaryFile()
+        tfile.write(video_file.read())
+        vid_cap = cv2.VideoCapture(tfile.name)
+        st_frame = st.empty()
+
+        while (vid_cap.isOpened()):
+            success, image = vid_cap.read()
+            if success:
+                display_detected_frames(st_frame, image, confidence)
+            else:
+                vid_cap.release()
+                break
+    except Exception as e:
+        st.error(f"Error detecting video: {e}")
