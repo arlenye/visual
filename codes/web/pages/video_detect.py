@@ -27,7 +27,7 @@ if video_file is not None:
         vid_cap = cv2.VideoCapture(tfile.name)
         st_frame = st.empty()
 
-        while (vid_cap.isOpened()):
+        while vid_cap.isOpened():
             success, image = vid_cap.read()
             if success:
                 display_detected_frames(st_frame, image, confidence)

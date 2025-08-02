@@ -6,7 +6,6 @@
 """
 
 import streamlit as st
-import tempfile
 from common.infer import display_detected_frames
 import cv2
 
@@ -23,6 +22,20 @@ def start_detect():
     if video_path:
         st.video(video_path, autoplay = True)
         # TODO 待解析
+        try:
+            vid_cap = cv2.VideoCapture(video_path)
+            st_frame = st.empty()
+
+            while vid_cap.isOpened():
+                success, image = vid_cap.read()
+                if success:
+                    display_detected_frames(st_frame, image, confidence)
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.error(f"Error detecting video: {e}")
+
     else:
         st.error('在线视频地址不能为空！')
 
