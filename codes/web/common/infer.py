@@ -43,20 +43,42 @@ def detect(image, conf):
     return result_list, res_plotted
 
 
-def display_detected_frames(st_frame, image, conf):
+def display_detected_frames(image, conf):
     # Resize the image to a standard size
     image = cv2.resize(image, (720, int(720 * (9 / 16))))
 
     # Predict the objects in the image using YOLOv8 model
     res = model.predict(source = image, conf = conf)
+    print("video detect", res[0])
+
+    score = res[0].boxes.conf  # 置信度分数
+    print(score)
+
+    if score.numel():
+        # score_item = score.item()
+        # print(score_item)
+
+        # Plot the detected objects on the video frame
+        res_plotted = res[0].plot()
+
+        return res_plotted[:, :, ::-1]
+        # st_frame.image(res_plotted,
+        #                caption = '检测后的视频',
+        #                channels = "BGR",
+        #                use_column_width = True
+        #                )
+    else:
+        print("detect empty")
+        return None
+
+
+def detect_video(frame, conf, is_save = True):
+    res = model.predict(source = frame, conf = conf, save = is_save)
 
     # Plot the detected objects on the video frame
     res_plotted = res[0].plot()
-    st_frame.image(res_plotted,
-                   caption = '检测后的视频',
-                   channels = "BGR",
-                   use_column_width = True
-                   )
+
+    return res_plotted
 
 
 # test
